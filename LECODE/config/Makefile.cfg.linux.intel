@@ -1,0 +1,42 @@
+# FC MPI compiler to use
+FC= mpif90 
+# C MPI compiler to use
+CC=mpicc 
+# C MPI compiler to use
+CPP=mpicxx 
+
+# Executable name
+EXE=lecode
+
+# Shared library name
+SHAREFLAGS=-shared -Wl,-soname,libLECODE.so.4
+PLUGLIB= libLECODE.so.4.0.1
+PLUGSLN= libLECODE.so.4
+SHARELIB= libLECODE.so
+
+# Rules to make library
+AR = ar -rcs
+
+# C/C++ optimisation flags
+CFLAGS= -m64 -O3 -w -fno-common -fPIC
+CPPFLAGS= -m64 -O3 -fno-common -fPIC
+
+# Fortran optimisation flags
+FCFLAGS= -m64 -O3 -cpp -xHost -fp-model source -fp-model except  -lstdc++ -cpp -fPIC
+#FCFLAGS= -m64 -O0 -traceback  -xHost -g -cpp  -fPIC -Warn all  -lstdc++ -check bounds  -ftrapuv
+
+FOX=/usr/local/intel/fox/bin
+
+# Linked libraries
+
+TRIANGLELIB=/usr/local/intel/triangle
+
+HDF5=/usr/local/intel/hdf5
+H5LDFLAGS = -L${HDF5}/lib 
+H5FLAGS = -I${HDF5}/include
+H5LIBS =  -lhdf5_fortran -lhdf5  -lhdf5hl_fortran -lhdf5_hl -L/usr/local/intel/zlib/lib -lz
+
+KDTREE=/usr/local/intel/kdtree2 
+KDTREELDFLAGS = -L${KDTREE}
+KDTREEFLAGS = -I${KDTREE}
+KDTREELIBS = -lkdtree

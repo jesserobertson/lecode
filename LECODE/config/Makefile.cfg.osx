@@ -1,0 +1,47 @@
+# FC MPI compiler to use
+FC=mpif90 
+# C MPI compiler to use
+CC=mpicc 
+# C MPI compiler to use
+CPP=mpic++ 
+
+# Executable name
+EXE=lecode
+
+# Shared library name
+SHAREFLAGS=-dynamiclib -install_name libLECODE.4.dylib -compatibility_version 4.0 -current_version 4.0.1
+PLUGLIB= libLECODE.4.0.1.dylib
+PLUGSLN= libLECODE.4.dylib
+SHARELIB= libLECODE.dylib
+
+# Rules to make library
+AR = ar -rcs
+
+# C/C++ optimisation flags
+CFLAGS= -O2 -fno-common
+CPPFLAGS= -O2 -fno-common
+
+# Fortran optimisation flags
+FCFLAGS=-O3 -funroll-loops --param max-unroll-times=2 -cpp -ftree-vectorize -ffast-math -lstdc++
+#FCFLAGS=-O3 -cpp -lstdc++
+#FCFLAGS= -O0 -g  -Wall -fbacktrace -lstdc++ -cpp -fcheck=bounds -finit-real=nan\
+	-fimplicit-none -ffpe-trap=zero,overflow,invalid -ffree-form -fno-common\
+	-Wtabs -Wunused-parameter -Wuninitialized  -ffree-line-length-none \
+	-fdump-fortran-optimized -fdump-tree-original
+
+# Linked libraries
+
+FOX=/usr/local/lecode/FoX/bin
+
+TRIANGLELIB=/usr/local/lecode/triangle
+
+HDF5=/usr/local/lecode/hdf5
+H5LDFLAGS = -L${HDF5}/lib 
+H5FLAGS = -I${HDF5}/include
+H5LIBS =  -lhdf5_fortran -lhdf5  -lhdf5hl_fortran -lhdf5_hl -lz 
+
+KDTREE=/usr/local/lecode/kdtree2 
+KDTREELDFLAGS = -L${KDTREE}
+KDTREEFLAGS = -I${KDTREE}
+KDTREELIBS = -lkdtree
+
